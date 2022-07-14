@@ -37,11 +37,28 @@ public class InputPojo {
         this.age = age;
     }
 
+    @Override
     public String toString(){
         return "{\n" +
                 "  \"firstName\": \"" + firstName + "\",\n" +
                 "  \"lastName\": \"" + lastName + "\",\n" +
                 "  \"age\": \"" + age + "\"\n" +
                 "}";
+    }
+
+    @Override
+    public boolean equals(Object other) {
+        if(!(other instanceof InputPojo)) return false;
+        InputPojo inputPojoOther  = (InputPojo) other;
+        if(other == null) return false;
+        return isEqual(firstName,inputPojoOther.firstName)
+            && isEqual(lastName,inputPojoOther.lastName)
+            && isEqual(age,inputPojoOther.age);
+    }
+
+    private <T> boolean isEqual(T objectA, T objectB){
+        if(objectA == null || objectB != null) return false;
+        if(objectA == null && objectB == null) return true;
+        return objectA.equals(objectB);
     }
 }
